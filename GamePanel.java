@@ -12,6 +12,7 @@ public class GamePanel extends JPanel {
 	
 	private BufferedImage bi;	
 	Graphics2D big;
+	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 
 	public GamePanel() {
 
@@ -22,6 +23,10 @@ public class GamePanel extends JPanel {
 
 	public void updateGameUI(GameReporter reporter){
 		big.clearRect(0, 0, 400, 650);
+		for(Sprite s : sprites){
+			s.draw(big);
+		}
+		
 		repaint();
 	}
 
