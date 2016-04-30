@@ -15,8 +15,7 @@ public class GameEngine implements KeyListener, GameReporter{
 	GamePanel gp;
 		
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
-	private SpaceShip v;	
-	
+	private SpaceShip v;
 	private Timer timer;
 	
 	private long score = 0;
@@ -52,6 +51,10 @@ public class GameEngine implements KeyListener, GameReporter{
 	private void process(){
 		if(Math.random() < difficulty){
 			generateEnemy();
+			if(difficulty > 200){
+				generateEnemy();
+				generateEnemy();
+			}
 		}
 		
 		Iterator<Enemy> e_iter = enemies.iterator();

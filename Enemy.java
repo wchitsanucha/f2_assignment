@@ -12,7 +12,7 @@ public class Enemy extends Sprite{
 	private boolean alive = true;
 	
 	public Enemy(int x, int y) {
-		super(x, y, 5, 10);
+		super(x, y, (int)(Math.random()*35), (int)(Math.random()*50));
 		
 	}
 
@@ -30,7 +30,7 @@ public class Enemy extends Sprite{
 	}
 
 	public void proceed(){
-		y += step;
+		y += step+20;
 		if(y > Y_TO_DIE){
 			alive = false;
 		}
