@@ -12,13 +12,12 @@ import javax.swing.Timer;
 
 
 public class GameEngine implements KeyListener, GameReporter{
-	GamePanel gp;
+	GamePanel gp;	
 	private SpaceShip v;	
 	
 	private Timer timer;
 	
 	private long score = 0;
-	
 	public GameEngine(GamePanel gp, SpaceShip v) {
 		this.gp = gp;
 		this.v = v;		
@@ -43,14 +42,24 @@ public class GameEngine implements KeyListener, GameReporter{
 	private void process(){
 		gp.updateGameUI(this);
 	}
-	
+	void controlVehicle(KeyEvent e) {
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_LEFT:
+			v.move(-1);
+			break;
+		case KeyEvent.VK_RIGHT:
+			v.move(1);
+			break;
+		}
+	}
+
 	public long getScore(){
 		return score;
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		//controlVehicle(e);
+		controlVehicle(e);
 		
 	}
 
