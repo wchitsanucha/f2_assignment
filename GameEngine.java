@@ -27,7 +27,7 @@ public class GameEngine implements KeyListener, GameReporter{
 		this.v = v;		
 		
 		gp.sprites.add(v);
-
+		
 		timer = new Timer(50, new ActionListener() {
 			
 			@Override
@@ -53,7 +53,6 @@ public class GameEngine implements KeyListener, GameReporter{
 		if(Math.random() < difficulty){
 			generateEnemy();
 		}
-
 		
 		Iterator<Enemy> e_iter = enemies.iterator();
 		while(e_iter.hasNext()){
@@ -68,6 +67,20 @@ public class GameEngine implements KeyListener, GameReporter{
 		}
 		
 		gp.updateGameUI(this);
+		
+		Rectangle2D.Double vr = v.getRectangle();
+		Rectangle2D.Double er;
+		for(Enemy e : enemies){
+			er = e.getRectangle();
+			if(er.intersects(vr)){
+				die();
+				return;
+			}
+		}
+	}
+	
+	public void die(){
+		timer.stop();
 	}
 	
 	void controlVehicle(KeyEvent e) {
