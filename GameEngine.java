@@ -13,13 +13,15 @@ import javax.swing.Timer;
 
 public class GameEngine implements KeyListener, GameReporter{
 	GamePanel gp;
-	private int i = 0;
+		
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
 	private SpaceShip v;	
 	
 	private Timer timer;
 	
 	private long score = 0;
+	private double difficulty = 0.1;
+	
 	public GameEngine(GamePanel gp, SpaceShip v) {
 		this.gp = gp;
 		this.v = v;		
@@ -48,10 +50,10 @@ public class GameEngine implements KeyListener, GameReporter{
 	}
 	
 	private void process(){
-		while(i == 0){
+		if(Math.random() < difficulty){
 			generateEnemy();
-			i++;
 		}
+
 		
 		Iterator<Enemy> e_iter = enemies.iterator();
 		while(e_iter.hasNext()){
@@ -61,11 +63,11 @@ public class GameEngine implements KeyListener, GameReporter{
 			if(!e.isAlive()){
 				e_iter.remove();
 				gp.sprites.remove(e);
+				score += 100;
 			}
 		}
 		
 		gp.updateGameUI(this);
-		
 	}
 	
 	void controlVehicle(KeyEvent e) {
@@ -75,6 +77,9 @@ public class GameEngine implements KeyListener, GameReporter{
 			break;
 		case KeyEvent.VK_RIGHT:
 			v.move(1);
+			break;
+		case KeyEvent.VK_D:
+			difficulty += 0.1;
 			break;
 		}
 	}
@@ -86,7 +91,6 @@ public class GameEngine implements KeyListener, GameReporter{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		controlVehicle(e);
-		
 	}
 
 	@Override
