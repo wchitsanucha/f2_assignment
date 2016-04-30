@@ -91,6 +91,7 @@ public class GameEngine implements KeyListener, GameReporter{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		controlVehicle(e);
+		
 	}
 
 	@Override
